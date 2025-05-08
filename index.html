@@ -5,24 +5,49 @@
   <title>My First MapLibre Map</title>
   <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel='stylesheet' href='https://unpkg.com/maplibre-gl/dist/maplibre-gl.css' />
+  <script src='https://unpkg.com/maplibre-gl/dist/maplibre-gl.js'></script>
 </head>
+
 <body>
-  <div id="map"></div>
+  <div id="map">
 
-  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
-  <script>
-    const map = new maplibregl.Map({
-      container: 'map',
-      style: 'https://demotiles.maplibre.org/style.json', // ベースマップ
-      center: [135.7586, 34.9855], // 東京駅 (経度, 緯度)
-      zoom: 1
-    });
-
-    // ポップアップ（吹き出し）を追加
-    const popup = new maplibregl.Popup({ offset: 25 })
-      .setLngLat([139.7671, 35.6812])
-      .setHTML("<h3>Hello world!</h3><p>Greetings from Japan!🇯🇵</p>")
-      .addTo(map);
-  </script>
 </body>
+
+  <script>
+    const map =  new maplibregl.Map({
+    container: 'map',
+    style: {
+        version: 8,
+        sources: {
+            rtile: {
+                type: 'raster',
+                tiles: [
+                   'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                ],
+                tileSize: 256,
+                attribution: '©<a href="https://www.openstreetmap.org/copyright/ja">OpenStreetMap</a> contributors',
+            },
+        },
+        layers: [{
+            id: 'raster-tiles',
+            type: 'raster',
+            source: 'rtile',
+            minzoom: 0,
+            maxzoom: 18,
+        }]
+    },
+    center: [139.9498, 35.8443], 
+    zoom:  15, 
+    pitch: 0 
+});
+
+  const locations = {
+    
+  }
+
+  window.addEventListener('DOMContentLoaded', init_map());
+</script>
+
 </html>
+
