@@ -63,3 +63,4 @@ function init() {
 		map.fitBounds(bounds, { padding: 50 });
 	}
 }
+
